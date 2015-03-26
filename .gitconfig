@@ -1,0 +1,42 @@
+[color]
+	ui = true
+[credential]
+	helper = wincred
+	
+[push]
+	default = current
+
+[difftool "codecompare"]
+  cmd = 'C:\\Program Files\\Devart\\Code Compare\\codecompare.exe' "$LOCAL" "$REMOTE"
+  renames = true
+[diff]
+tool = codecompare
+ 
+[mergetool "tortoise"]
+    cmd = \"C:/Program Files/TortoiseSVN/bin/TortoiseMerge.exe\" -base:\"$BASE\" -theirs:\"$REMOTE\" -mine:\"$LOCAL\" -merged:\"$MERGED\"        
+[mergetool]
+    prompt = false
+    keepBackup = false
+[merge]
+	tool = tortoise
+
+[difftool]
+prompt = false
+
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	put = push origin HEAD
+	rhu = !git reset --hard $(git rev-parse --symbolic-full-name @{u})
+	dt = difftool
+	pushu = push -u
+	putu = push -u origin HEAD
+	putqa = push origin HEAD:qa.internal
+	deletebr = !sh -c 'git push origin :$1 && git branch -D $1' -
+[color "status"]
+	changed = red normal bold
+	untracked = yellow normal bold
+[color "branch"]
+    remote = red normal bold
